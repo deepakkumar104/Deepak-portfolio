@@ -176,8 +176,8 @@ const portfolioData = {
     score: "7.27",
     // Earlier education. Add or remove { } blocks as needed.
     earlier: [
-      { level: "Class 12 (Intermediate)", board: "", year: "", score: "Add your percentage in data.js" },
-      { level: "Class 10 (Matriculation)", board: "", year: "", score: "Add your percentage in data.js" }
+      { level: "Class 12 (Intermediate)", board: "", year: "", score: "85.8%" },
+      { level: "Class 10 (Matriculation)", board: "", year: "", score: "46.8%" }
     ]
   },
 
@@ -198,11 +198,11 @@ const portfolioData = {
 
   /* ---------- 10. CONTACT ---------- */
   contact: {
-    email: "deepak@example.com",
-    phone: "+91 00000 00000",
+    email: "deepakrajj35@gmail.com",
+    phone: "+91 72501 17850",
     location: "Ranchi, Jharkhand, India",
-    linkedin: "https://www.linkedin.com/in/your-linkedin-id",
-    github: "https://github.com/your-username",
+    linkedin: "https://www.linkedin.com/in/deepak-kumar-750784382/",
+    github: "https://github.com/deepakkumar104",
     note: "The quickest way to reach me is email. I usually reply within a day."
   },
 
