@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Deepak Kumar | B.Tech EEE Student — IoT, Embedded Systems & Solar Energy</title>
+  <meta name="description" content="Portfolio of Deepak Kumar, B.Tech Electrical & Electronics Engineering student at Cambridge Institute of Technology, Ranchi. Projects in IoT, embedded systems, ESP32, Arduino and solar PV monitoring. Open to internships and placements." />
+  <meta name="author" content="Deepak Kumar" />
+  <meta name="theme-color" content="#0A1410" />
+
+  <!-- Social preview (optional, safe to leave as is) -->
+  <meta property="og:title" content="Deepak Kumar | B.Tech EEE Student" />
+  <meta property="og:description" content="IoT, Embedded Systems, Solar Energy and Electrical Automation projects." />
+  <meta property="og:type" content="website" />
+
+  <link rel="icon" href="images/profile.jpg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- ============ NAVIGATION ============ -->
+  <header class="site-header" id="siteHeader">
+    <nav class="nav container" aria-label="Main navigation">
+      <a class="nav-logo" href="#home">
+        <span class="nav-logo-mark" id="navLogoMark"></span>
+        <span id="navLogoName">Portfolio</span>
+      </a>
+
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navMenu" aria-label="Open menu">
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+      </button>
+
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#training">Training</a></li>
+        <li><a href="#certificates">Certificates</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#resume">Resume</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div class="hero-text">
+          <p class="hero-badge" id="heroBadge" hidden></p>
+          <h1 id="heroName">Loading…</h1>
+          <p class="hero-title" id="heroTitle"></p>
+          <p class="hero-tagline" id="heroTagline"></p>
+          <p class="hero-intro" id="heroIntro"></p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#projects">View projects</a>
+            <a class="btn btn-outline" id="heroResumeBtn" href="resume.pdf" download>Download resume</a>
+            <a class="btn btn-ghost" href="#contact">Contact me</a>
+          </div>
+        </div>
+
+        <div class="hero-photo">
+          <img id="heroPhoto" src="images/profile.jpg" alt="Profile photo" width="420" height="500" />
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ABOUT ============ -->
+    <section class="section" id="about">
+      <div class="container">
+        <h2 class="section-title" id="aboutHeading">About me</h2>
+        <div class="about-grid">
+          <div class="about-text" id="aboutText"></div>
+          <aside class="about-facts" aria-label="Quick facts">
+            <dl id="aboutFacts"></dl>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SKILLS ============ -->
+    <section class="section section-alt" id="skills">
+      <div class="container">
+        <h2 class="section-title">Skills</h2>
+        <p class="section-lead">What I can work with today, grouped by area.</p>
+        <div class="card-grid" id="skillsGrid"></div>
+      </div>
+    </section>
+
+    <!-- ============ PROJECTS ============ -->
+    <section class="section" id="projects">
+      <div class="container">
+        <h2 class="section-title">Projects</h2>
+        <p class="section-lead">Hardware projects I designed, built and tested myself.</p>
+        <div class="project-grid" id="projectsGrid"></div>
+      </div>
+    </section>
+
+    <!-- ============ TRAINING ============ -->
+    <section class="section section-alt" id="training">
+      <div class="container">
+        <h2 class="section-title">Training</h2>
+        <p class="section-lead">Industry training programmes I have completed.</p>
+        <div class="timeline" id="trainingList"></div>
+      </div>
+    </section>
+
+    <!-- ============ CERTIFICATES ============ -->
+    <section class="section" id="certificates">
+      <div class="container">
+        <h2 class="section-title">Certificates</h2>
+        <p class="section-lead">Click any certificate to open the full image.</p>
+        <div class="cert-grid" id="certGrid"></div>
+      </div>
+    </section>
+
+    <!-- ============ EDUCATION ============ -->
+    <section class="section section-alt" id="education">
+      <div class="container">
+        <h2 class="section-title">Education</h2>
+        <div class="edu-wrap" id="educationBlock"></div>
+        <div class="achievements" id="achievementsBlock" hidden>
+          <h3>Achievements</h3>
+          <ul id="achievementsList"></ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ RESUME ============ -->
+    <section class="section" id="resume">
+      <div class="container">
+        <div class="resume-card">
+          <div>
+            <h2 class="section-title resume-title">Resume</h2>
+            <p id="resumeDesc"></p>
+            <p class="resume-meta" id="resumeUpdated"></p>
+          </div>
+          <div class="resume-actions">
+            <a class="btn btn-primary" id="resumeDownload" href="resume.pdf" download>Download resume (PDF)</a>
+            <a class="btn btn-outline" id="resumeView" href="resume.pdf" target="_blank" rel="noopener">Open in new tab</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CONTACT ============ -->
+    <section class="section section-alt" id="contact">
+      <div class="container">
+        <h2 class="section-title">Contact</h2>
+        <p class="section-lead" id="contactNote"></p>
+
+        <div class="contact-grid">
+          <ul class="contact-list" id="contactList"></ul>
+
+          <form class="contact-form" id="contactForm" novalidate>
+            <p class="form-note">This form opens your own email app — no server is involved.</p>
+
+            <label for="cfName">Your name</label>
+            <input type="text" id="cfName" name="name" autocomplete="name" required />
+
+            <label for="cfEmail">Your email</label>
+            <input type="email" id="cfEmail" name="email" autocomplete="email" required />
+
+            <label for="cfMessage">Message</label>
+            <textarea id="cfMessage" name="message" rows="5" required></textarea>
+
+            <button class="btn btn-primary" type="submit">Send message</button>
+            <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <p class="footer-name" id="footerName"></p>
+        <p class="footer-line" id="footerLine"></p>
+      </div>
+      <ul class="footer-links" id="footerLinks"></ul>
+    </div>
+  </footer>
+
+  <a class="to-top" href="#home" id="toTop" aria-label="Back to top">↑</a>
+
+  <!-- data.js must load BEFORE script.js -->
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
