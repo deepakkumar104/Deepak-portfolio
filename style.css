@@ -224,7 +224,7 @@ main, .site-footer, .bottom-nav, .modal-overlay, .lightbox-overlay {
   border-radius: 50%;
   padding: 3px;
   background: conic-gradient(from 0deg, var(--accent), var(--accent-2), var(--accent), var(--accent-strong), var(--accent));
-  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
   animation: ringSpin 10s linear infinite;
@@ -242,7 +242,7 @@ main, .site-footer, .bottom-nav, .modal-overlay, .lightbox-overlay {
   background: var(--surface);
 }
 @keyframes ringSpin {
-  to { transform: rotate(360deg); }
+  from { transform: rotate(0deg); }
 }
 
 /* ---------------- Contact icons (hero + contact section) ---------------- */
