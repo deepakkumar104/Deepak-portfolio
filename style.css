@@ -9,8 +9,8 @@
 :root {
   --bg:          #050806;
   --bg-alt:      #0A130D;
-  --surface:     #163524;
-  --surface-2:   #1C4029;
+  --surface:     rgba(3, 8, 5, 0.55);
+  --surface-2:   rgba(3, 8, 5, 0.72);
   --border:      #2F5A3E;
   --accent:      #E8A94A;   /* copper trace */
   --accent-strong:#FFC876;  /* copper, brighter, for hover */
@@ -468,7 +468,7 @@ main, .site-footer, .bottom-nav, .modal-overlay, .lightbox-overlay {
   position: relative;
   width: 100%;
   max-width: 640px;
-  background: var(--surface);
+  background: rgba(6, 16, 11, 0.94);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow);
@@ -727,9 +727,13 @@ main, .site-footer, .bottom-nav, .modal-overlay, .lightbox-overlay {
   .btn { width: 100%; }
   .hero-actions, .resume-actions { width: 100%; }
   .modal-box { padding: 30px 20px 24px; }
-  .site-footer { padding-bottom: 118px; }
-  .bottom-nav a { padding: 7px 9px; }
-  .bn-label { font-size: 0.58rem; }
+  .site-footer { padding-bottom: 96px; }
+  /* Icon-only nav on phones: with no text label, all 9 items fit in one
+     row on typical phone widths, so nothing sits hidden behind scrolling. */
+  .bottom-nav { gap: 0; padding: 6px 8px; justify-content: space-between; width: calc(100% - 20px); }
+  .bottom-nav a { padding: 8px 6px; flex: 1 1 0; }
+  .bn-ico { font-size: 1.15rem; }
+  .bn-label { display: none; }
 }
 
 /* ---------------- Reduced motion ---------------- */
