@@ -7,17 +7,17 @@
    ============================================================ */
 
 :root {
-  --bg:          #0A1410;
-  --bg-alt:      #0E1B14;
-  --surface:     #13251C;
-  --surface-2:   #182F22;
-  --border:      #24402F;
+  --bg:          #0D2117;
+  --bg-alt:      #112A1C;
+  --surface:     #163524;
+  --surface-2:   #1C4029;
+  --border:      #2F5A3E;
   --accent:      #E8A94A;   /* copper trace */
   --accent-strong:#FFC876;  /* copper, brighter, for hover */
   --accent-soft: #2E2211;   /* dim copper wash for badges/marks */
   --accent-2:    #4CFFA0;   /* phosphor green, used only for readouts/glow */
   --text:        #F4F7F2;
-  --text-muted:  #9FB6A6;
+  --text-muted:  #A9C6B4;
   --radius:      10px;
   --radius-lg:   16px;
   --maxw:        1120px;
@@ -224,7 +224,7 @@ main, .site-footer, .bottom-nav, .modal-overlay, .lightbox-overlay {
   border-radius: 50%;
   padding: 3px;
   background: conic-gradient(from 0deg, var(--accent), var(--accent-2), var(--accent), var(--accent-strong), var(--accent));
-  -mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
   animation: ringSpin 10s linear infinite;
