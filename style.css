@@ -739,6 +739,7 @@ main, .site-footer, .bottom-nav, .modal-0_0_0 {
   .bottom-nav, .modal-overlay, .lightbox-overlay, #bgCanvas, .hero-actions, .resume-actions { display: none; }
   body { background: #fff; color: #000; }
 }
+.modal-overlay,
 .lightbox-overlay {
     display: none;
 }
