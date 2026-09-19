@@ -85,10 +85,10 @@ a:hover { text-decoration: underline; }
   height: 100vh;
   z-index: 0;
   pointer-events: none;
-  display: none;
+  display: block;
 }
 
-main, .site-footer, .bottom-nav, .modal-0_0_0 {
+main, .site-footer, .bottom-nav, .modal-overlay, .lightbox-overlay {
   position: relative;
   z-index: 1;
 }
@@ -108,7 +108,7 @@ main, .site-footer, .bottom-nav, .modal-0_0_0 {
   height: 6px;
   border-radius: 50%;
   background: var(--border);
-  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.0);
+  box-shadow: inset 0 0 0 1px rgba(232, 169, 74, 0.35);
   pointer-events: none;
 }
 .skill-card::before, .mini-card::before, .cert-card::before,
@@ -224,7 +224,7 @@ main, .site-footer, .bottom-nav, .modal-0_0_0 {
   border-radius: 50%;
   padding: 3px;
   background: conic-gradient(from 0deg, var(--accent), var(--accent-2), var(--accent), var(--accent-strong), var(--accent));
-  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
   animation: ringSpin 10s linear infinite;
@@ -432,12 +432,17 @@ main, .site-footer, .bottom-nav, .modal-0_0_0 {
   cursor: pointer;
   font-family: inherit;
   color: var(--text);
-  transition: border-color 0.2s ease, transform 0.2s ease;
+  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
 }
-.mini-card:hover { border-color: var(--accent); transform: translateY(-4px); }
-.mini-card:focus-visible { border-color: var(--accent); }
+.mini-card:hover, .mini-card:focus-visible {
+  border-color: var(--accent);
+  transform: translateY(-4px) scale(1.035);
+  box-shadow: var(--glow-gold);
+  filter: brightness(1.08);
+}
+.mini-card:hover h3, .mini-card:focus-visible h3 { font-weight: 700; }
 .mini-icon { font-size: 2rem; display: block; margin-bottom: 12px; }
-.mini-card h3 { font-size: 0.94rem; margin: 0; font-weight: 600; line-height: 1.35; }
+.mini-card h3 { font-size: 0.94rem; margin: 0; font-weight: 600; line-height: 1.35; transition: font-weight 0.15s ease; }
 
 /* ---------------- Popup / modal (project & training detail) ---------------- */
 .modal-overlay {
@@ -506,8 +511,8 @@ main, .site-footer, .bottom-nav, .modal-0_0_0 {
   position: fixed;
   inset: 0;
   z-index: 600;
-  background: rgba(0,0,0,0.9);
-  display: none;
+  background: rgba(2, 6, 4, 0.9);
+  display: flex;
   align-items: center;
   justify-content: center;
   padding: 40px 20px;
@@ -532,9 +537,16 @@ main, .site-footer, .bottom-nav, .modal-0_0_0 {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   overflow: hidden;
-  transition: border-color 0.2s ease, transform 0.2s ease;
+  cursor: pointer;
+  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
 }
-.cert-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+.cert-card:hover, .cert-card:focus-visible {
+  border-color: var(--accent);
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: var(--glow-gold);
+  filter: brightness(1.06);
+}
+.cert-card:hover h3, .cert-card:focus-visible h3 { font-weight: 700; }
 .cert-card img {
   width: 100%;
   aspect-ratio: 4 / 3;
@@ -738,8 +750,4 @@ main, .site-footer, .bottom-nav, .modal-0_0_0 {
 @media print {
   .bottom-nav, .modal-overlay, .lightbox-overlay, #bgCanvas, .hero-actions, .resume-actions { display: none; }
   body { background: #fff; color: #000; }
-}
-.modal-overlay,
-.lightbox-overlay {
-    display: none;
 }

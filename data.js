@@ -210,8 +210,8 @@ const portfolioData = {
     score: "7.27",
     // Earlier education, most recent first. Add or remove { } blocks as needed.
     earlier: [
-      { level: "12th (Intermediate)", board: "Jharkhand Board", year: "2023", score: "84%" },
-      { level: "10th (Matriculation)", board: "CBSE", year: "2021", score: "49%" }
+      { level: "12th (Intermediate)", board: "Jharkhand Board", year: "2021", score: "84%" },
+      { level: "10th (Matriculation)", board: "CBSE", year: "2019", score: "49%" }
     ]
   },
 
@@ -234,10 +234,10 @@ const portfolioData = {
   /* Shown as icons only, in two places: beside the hero photo, and in
      the Contact section footer. "location" opens a map search link. */
   contact: {
-    email: "deepakrajj35@gmail.com",
-    phone: "+91 7250117850",
+    email: "deepak@example.com",
+    phone: "+91 00000 00000",
     location: "Ranchi, Jharkhand, India",
-    linkedin: "https://www.linkedin.com/in/deepak-kumar-750784382/?lipi=urn%3Ali%3Apage%3Ad_flagship3_feed%3Bru5Hpl8LTreHOZQu9VmQ3A%3D%3D",
+    linkedin: "https://www.linkedin.com/in/your-linkedin-id",
     github: "https://github.com/your-username",
     note: "The quickest way to reach me is email. I usually reply within a day."
   },

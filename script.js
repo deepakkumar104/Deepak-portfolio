@@ -508,107 +508,177 @@
     });
   }
 
-  /* ---------- 14. Animated circuit-board background ---------- */
+  /* ---------- 14. Animated PCB / circuit-board background ----------
+     A faint, low-opacity electrical-circuit pattern (right-angle traces,
+     solder pads, a few IC-style chip outlines) with small glowing pulses
+     that crawl slowly along the traces, like current flowing through a
+     board. The static trace layer is drawn once onto an offscreen canvas
+     and just re-stamped onto the visible canvas every frame — only the
+     pulses are recomputed — so it stays cheap even on longer pages. */
 
   (function backgroundAnimation() {
     var canvas = el("bgCanvas");
     if (!canvas || !canvas.getContext) return;
     var ctx = canvas.getContext("2d");
 
+    var staticCanvas = document.createElement("canvas");
+    var staticCtx = staticCanvas.getContext("2d");
+
     var W = 0, H = 0, DPR = 1;
-    var traces = [];
-    var particles = [];
+    var paths = [];   // circuit traces, each a list of {x,y} grid points
+    var pulses = [];  // small glowing dots travelling along a path
 
     function resize() {
       DPR = Math.min(window.devicePixelRatio || 1, 2);
       W = window.innerWidth;
       H = window.innerHeight;
-      canvas.width = Math.floor(W * DPR);
-      canvas.height = Math.floor(H * DPR);
-      canvas.style.width = W + "px";
-      canvas.style.height = H + "px";
+
+      canvas.width = staticCanvas.width = Math.floor(W * DPR);
+      canvas.height = staticCanvas.height = Math.floor(H * DPR);
+      canvas.style.width = staticCanvas.style.width = W + "px";
+      canvas.style.height = staticCanvas.style.height = H + "px";
       ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
-      buildTraces();
-      buildParticles();
+      staticCtx.setTransform(DPR, 0, 0, DPR, 0, 0);
+
+      buildPaths();
+      drawStaticLayer();
+      buildPulses();
     }
 
-    function buildTraces() {
-      traces = [];
-      var count = Math.max(8, Math.round((W * H) / 90000));
+    // Build a handful of right-angle "traces" snapped to a loose grid,
+    // each 3-6 segments long, so the pattern reads as a circuit board
+    // rather than random scribbles.
+    function buildPaths() {
+      paths = [];
+      var grid = W < 700 ? 90 : 110;
+      var count = Math.max(6, Math.round((W * H) / (W < 700 ? 70000 : 95000)));
+
       for (var i = 0; i < count; i++) {
-        var x = Math.random() * W;
-        var y = Math.random() * H;
+        var x = Math.round((Math.random() * W) / grid) * grid;
+        var y = Math.round((Math.random() * H) / grid) * grid;
+        var segs = 3 + Math.floor(Math.random() * 3);
+        var pts = [{ x: x, y: y }];
         var horiz = Math.random() < 0.5;
-        var len = 50 + Math.random() * 130;
-        traces.push({
-          x1: x, y1: y,
-          x2: horiz ? x + len : x,
-          y2: horiz ? y : y + len
-        });
-      }
-    }
 
-    function buildParticles() {
-      var count = W < 700 ? 16 : 38;
-      particles = [];
-      for (var i = 0; i < count; i++) {
-        particles.push({
-          x: Math.random() * W,
-          y: Math.random() * H,
-          vx: (Math.random() - 0.5) * 0.22,
-          vy: (Math.random() - 0.5) * 0.22,
-          r: 1 + Math.random() * 1.5,
-          a: 0.25 + Math.random() * 0.45
-        });
-      }
-    }
-
-    function draw() {
-      ctx.clearRect(0, 0, W, H);
-
-      ctx.lineWidth = 1;
-      ctx.strokeStyle = "rgba(232,169,74,0.14)";
-      ctx.fillStyle = "rgba(232,169,74,0.3)";
-      traces.forEach(function (l) {
-        ctx.beginPath();
-        ctx.moveTo(l.x1, l.y1);
-        ctx.lineTo(l.x2, l.y2);
-        ctx.stroke();
-        ctx.beginPath();
-        ctx.arc(l.x2, l.y2, 1.5, 0, Math.PI * 2);
-        ctx.fill();
-      });
-
-      particles.forEach(function (pt) {
-        if (!reduceMotion) {
-          pt.x += pt.vx;
-          pt.y += pt.vy;
-          if (pt.x < 0) pt.x = W; if (pt.x > W) pt.x = 0;
-          if (pt.y < 0) pt.y = H; if (pt.y > H) pt.y = 0;
+        for (var s = 0; s < segs; s++) {
+          var hop = grid * (1 + Math.floor(Math.random() * 2));
+          if (horiz) x += Math.random() < 0.5 ? hop : -hop;
+          else y += Math.random() < 0.5 ? hop : -hop;
+          x = Math.max(0, Math.min(W, x));
+          y = Math.max(0, Math.min(H, y));
+          pts.push({ x: x, y: y });
+          horiz = !horiz;
         }
+        paths.push(pts);
+      }
+    }
+
+    // Draws the faint traces + pads + a few chip-like rectangles once.
+    function drawStaticLayer() {
+      staticCtx.clearRect(0, 0, W, H);
+      staticCtx.lineWidth = 1;
+      staticCtx.strokeStyle = "rgba(232,169,74,0.09)";
+      staticCtx.fillStyle = "rgba(232,169,74,0.16)";
+
+      paths.forEach(function (pts) {
+        staticCtx.beginPath();
+        staticCtx.moveTo(pts[0].x, pts[0].y);
+        for (var i = 1; i < pts.length; i++) staticCtx.lineTo(pts[i].x, pts[i].y);
+        staticCtx.stroke();
+
+        // solder pad at each bend + a small square "IC" at the trace end
+        pts.forEach(function (pt, i) {
+          staticCtx.beginPath();
+          staticCtx.arc(pt.x, pt.y, i === 0 || i === pts.length - 1 ? 2.4 : 1.6, 0, Math.PI * 2);
+          staticCtx.fill();
+        });
+
+        var last = pts[pts.length - 1];
+        if (Math.random() < 0.35) {
+          staticCtx.strokeRect(last.x - 9, last.y - 9, 18, 18);
+        }
+      });
+    }
+
+    function buildPulses() {
+      pulses = [];
+      var count = W < 700 ? Math.min(10, paths.length) : Math.min(22, paths.length);
+      var used = {};
+      for (var i = 0; i < count; i++) {
+        var idx = Math.floor(Math.random() * paths.length);
+        if (used[idx] || paths[idx].length < 2) continue;
+        used[idx] = true;
+        pulses.push({
+          path: paths[idx],
+          t: Math.random(),               // 0..1 progress along the path
+          speed: 0.00016 + Math.random() * 0.00018 // very slow, smooth crawl
+        });
+      }
+    }
+
+    function pathLength(pts) {
+      var total = 0;
+      for (var i = 1; i < pts.length; i++) {
+        total += Math.hypot(pts[i].x - pts[i - 1].x, pts[i].y - pts[i - 1].y);
+      }
+      return total;
+    }
+
+    function pointAt(pts, t) {
+      var total = pathLength(pts);
+      var target = total * t;
+      var walked = 0;
+      for (var i = 1; i < pts.length; i++) {
+        var segLen = Math.hypot(pts[i].x - pts[i - 1].x, pts[i].y - pts[i - 1].y);
+        if (walked + segLen >= target) {
+          var localT = segLen === 0 ? 0 : (target - walked) / segLen;
+          return {
+            x: pts[i - 1].x + (pts[i].x - pts[i - 1].x) * localT,
+            y: pts[i - 1].y + (pts[i].y - pts[i - 1].y) * localT
+          };
+        }
+        walked += segLen;
+      }
+      return pts[pts.length - 1];
+    }
+
+    function draw(dt) {
+      ctx.clearRect(0, 0, W, H);
+      ctx.drawImage(staticCanvas, 0, 0, W, H);
+
+      pulses.forEach(function (p) {
+        if (!reduceMotion) {
+          p.t += p.speed * dt;
+          if (p.t > 1) p.t -= 1;
+        }
+        var pos = pointAt(p.path, p.t);
         ctx.beginPath();
-        ctx.fillStyle = "rgba(76,255,160," + pt.a + ")";
-        ctx.shadowColor = "rgba(76,255,160,0.8)";
-        ctx.shadowBlur = 6;
-        ctx.arc(pt.x, pt.y, pt.r, 0, Math.PI * 2);
+        ctx.fillStyle = "rgba(76,255,160,0.75)";
+        ctx.shadowColor = "rgba(76,255,160,0.9)";
+        ctx.shadowBlur = 7;
+        ctx.arc(pos.x, pos.y, 1.8, 0, Math.PI * 2);
         ctx.fill();
         ctx.shadowBlur = 0;
       });
     }
 
-    function loop() {
-      draw();
+    var lastT = null;
+    function loop(t) {
+      if (lastT == null) lastT = t;
+      var dt = t - lastT;
+      lastT = t;
+      draw(dt);
       if (!reduceMotion) requestAnimationFrame(loop);
     }
 
     window.addEventListener("resize", resize);
     resize();
     if (reduceMotion) {
-      draw();
+      draw(0);
     } else {
       requestAnimationFrame(loop);
       window.addEventListener("scroll", function () {
-        canvas.style.transform = "translateY(" + (window.scrollY * 0.03) + "px)";
+        canvas.style.transform = "translateY(" + (window.scrollY * 0.025) + "px)";
       }, { passive: true });
     }
   })();
