@@ -88,7 +88,7 @@ a:hover { text-decoration: underline; }
   display: none;
 }
 
-main, .site-footer, .bottom-nav, .modal-0_0_0, .lightbox-overlay {
+main, .site-footer, .bottom-nav, .modal-0_0_0 {
   position: relative;
   z-index: 1;
 }
