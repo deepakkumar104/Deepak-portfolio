@@ -27,6 +27,13 @@
 
 * { box-sizing: border-box; }
 
+/* Belt-and-braces: an element with the HTML "hidden" attribute must stay
+   hidden even if a later rule below sets display:flex/grid/block on the
+   same element (e.g. .modal-overlay, .lightbox-overlay). Without this,
+   those overlays render on screen from page load instead of only when
+   JavaScript removes "hidden". */
+[hidden] { display: none !important; }
+
 html { scroll-behavior: smooth; scroll-padding-top: 24px; }
 
 body {
@@ -224,7 +231,7 @@ main, .site-footer, .bottom-nav, .modal-overlay, .lightbox-overlay {
   border-radius: 50%;
   padding: 3px;
   background: conic-gradient(from 0deg, var(--accent), var(--accent-2), var(--accent), var(--accent-strong), var(--accent));
-  -mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
   animation: ringSpin 10s linear infinite;
@@ -242,7 +249,7 @@ main, .site-footer, .bottom-nav, .modal-overlay, .lightbox-overlay {
   background: var(--surface);
 }
 @keyframes ringSpin {
-  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 /* ---------------- Contact icons (hero + contact section) ---------------- */
@@ -750,7 +757,4 @@ main, .site-footer, .bottom-nav, .modal-overlay, .lightbox-overlay {
 @media print {
   .bottom-nav, .modal-overlay, .lightbox-overlay, #bgCanvas, .hero-actions, .resume-actions { display: none; }
   body { background: #fff; color: #000; }
-}
-.lightbox-overlay {
-    display: none;
 }
