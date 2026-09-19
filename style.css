@@ -85,10 +85,10 @@ a:hover { text-decoration: underline; }
   height: 100vh;
   z-index: 0;
   pointer-events: none;
-  display: block;
+  display: none;
 }
 
-main, .site-footer, .bottom-nav, .modal-overlay, .lightbox-overlay {
+main, .site-footer, .bottom-nav, .modal-0,0,0, .lightbox-overlay {
   position: relative;
   z-index: 1;
 }
@@ -108,7 +108,7 @@ main, .site-footer, .bottom-nav, .modal-overlay, .lightbox-overlay {
   height: 6px;
   border-radius: 50%;
   background: var(--border);
-  box-shadow: inset 0 0 0 1px rgba(232, 169, 74, 0.35);
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.0);
   pointer-events: none;
 }
 .skill-card::before, .mini-card::before, .cert-card::before,
@@ -506,8 +506,8 @@ main, .site-footer, .bottom-nav, .modal-overlay, .lightbox-overlay {
   position: fixed;
   inset: 0;
   z-index: 600;
-  background: rgba(2, 6, 4, 0.9);
-  display: flex;
+  background: rgba(0,0,0,0.9);
+  display: none;
   align-items: center;
   justify-content: center;
   padding: 40px 20px;
