@@ -210,8 +210,8 @@ const portfolioData = {
     score: "7.27",
     // Earlier education, most recent first. Add or remove { } blocks as needed.
     earlier: [
-      { level: "12th (Intermediate)", board: "Jharkhand Board", year: "2021", score: "84%" },
-      { level: "10th (Matriculation)", board: "CBSE", year: "2019", score: "49%" }
+      { level: "12th (Intermediate)", board: "Jharkhand Board", year: "2023", score: "84%" },
+      { level: "10th (Matriculation)", board: "CBSE", year: "2021", score: "49%" }
     ]
   },
 
