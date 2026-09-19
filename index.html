@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Deepak Kumar | B.Tech EEE Student — IoT, Embedded Systems & Solar Energy</title>
   <meta name="description" content="Portfolio of Deepak Kumar, B.Tech Electrical & Electronics Engineering student at Cambridge Institute of Technology, Ranchi. Projects in IoT, embedded systems, ESP32, Arduino and solar PV monitoring. Open to internships and placements." />
   <meta name="author" content="Deepak Kumar" />
@@ -23,33 +23,8 @@
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <!-- ============ NAVIGATION ============ -->
-  <header class="site-header" id="siteHeader">
-    <nav class="nav container" aria-label="Main navigation">
-      <a class="nav-logo" href="#home">
-        <span class="nav-logo-mark" id="navLogoMark"></span>
-        <span id="navLogoName">Portfolio</span>
-      </a>
-
-      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navMenu" aria-label="Open menu">
-        <span class="nav-toggle-bar"></span>
-        <span class="nav-toggle-bar"></span>
-        <span class="nav-toggle-bar"></span>
-      </button>
-
-      <ul class="nav-menu" id="navMenu">
-        <li><a href="#home">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#training">Training</a></li>
-        <li><a href="#certificates">Certificates</a></li>
-        <li><a href="#education">Education</a></li>
-        <li><a href="#resume">Resume</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
-  </header>
+  <!-- ============ ANIMATED BACKGROUND ============ -->
+  <canvas id="bgCanvas" aria-hidden="true"></canvas>
 
   <main id="main">
 
@@ -69,8 +44,11 @@
           </div>
         </div>
 
-        <div class="hero-photo">
-          <img id="heroPhoto" src="images/profile.jpg" alt="Profile photo" width="420" height="500" />
+        <div class="hero-photo-col">
+          <div class="hero-photo">
+            <img id="heroPhoto" src="images/profile.jpg" alt="Profile photo" width="420" height="420" />
+          </div>
+          <ul class="contact-icons" id="heroContactIcons" aria-label="Contact links"></ul>
         </div>
       </div>
     </section>
@@ -101,8 +79,12 @@
     <section class="section" id="projects">
       <div class="container">
         <h2 class="section-title">Projects</h2>
-        <p class="section-lead">Hardware projects I designed, built and tested myself.</p>
-        <div class="project-grid" id="projectsGrid"></div>
+        <p class="section-lead">Hardware projects I designed, built and tested myself. Tap a card for the full write-up.</p>
+      </div>
+      <div class="slider" id="projectsSlider">
+        <button class="slider-arrow slider-arrow-left" type="button" data-slider="projects" data-dir="-1" aria-label="Previous projects">‹</button>
+        <div class="slider-track" id="projectsTrack" tabindex="0" aria-label="Projects, scrollable"></div>
+        <button class="slider-arrow slider-arrow-right" type="button" data-slider="projects" data-dir="1" aria-label="Next projects">›</button>
       </div>
     </section>
 
@@ -110,8 +92,12 @@
     <section class="section section-alt" id="training">
       <div class="container">
         <h2 class="section-title">Training</h2>
-        <p class="section-lead">Industry training programmes I have completed.</p>
-        <div class="timeline" id="trainingList"></div>
+        <p class="section-lead">Industry training programmes I have completed. Tap a card for the full details.</p>
+      </div>
+      <div class="slider" id="trainingSlider">
+        <button class="slider-arrow slider-arrow-left" type="button" data-slider="training" data-dir="-1" aria-label="Previous training">‹</button>
+        <div class="slider-track" id="trainingTrack" tabindex="0" aria-label="Training, scrollable"></div>
+        <button class="slider-arrow slider-arrow-right" type="button" data-slider="training" data-dir="1" aria-label="Next training">›</button>
       </div>
     </section>
 
@@ -119,7 +105,7 @@
     <section class="section" id="certificates">
       <div class="container">
         <h2 class="section-title">Certificates</h2>
-        <p class="section-lead">Click any certificate to open the full image.</p>
+        <p class="section-lead">Tap any certificate to open the full image.</p>
         <div class="cert-grid" id="certGrid"></div>
       </div>
     </section>
@@ -128,7 +114,7 @@
     <section class="section section-alt" id="education">
       <div class="container">
         <h2 class="section-title">Education</h2>
-        <div class="edu-wrap" id="educationBlock"></div>
+        <div class="edu-timeline" id="educationBlock"></div>
         <div class="achievements" id="achievementsBlock" hidden>
           <h3>Achievements</h3>
           <ul id="achievementsList"></ul>
@@ -158,26 +144,7 @@
       <div class="container">
         <h2 class="section-title">Contact</h2>
         <p class="section-lead" id="contactNote"></p>
-
-        <div class="contact-grid">
-          <ul class="contact-list" id="contactList"></ul>
-
-          <form class="contact-form" id="contactForm" novalidate>
-            <p class="form-note">This form opens your own email app — no server is involved.</p>
-
-            <label for="cfName">Your name</label>
-            <input type="text" id="cfName" name="name" autocomplete="name" required />
-
-            <label for="cfEmail">Your email</label>
-            <input type="email" id="cfEmail" name="email" autocomplete="email" required />
-
-            <label for="cfMessage">Message</label>
-            <textarea id="cfMessage" name="message" rows="5" required></textarea>
-
-            <button class="btn btn-primary" type="submit">Send message</button>
-            <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
-          </form>
-        </div>
+        <ul class="contact-icons contact-icons-lg" id="contactIcons" aria-label="Contact links"></ul>
       </div>
     </section>
 
@@ -190,11 +157,35 @@
         <p class="footer-name" id="footerName"></p>
         <p class="footer-line" id="footerLine"></p>
       </div>
-      <ul class="footer-links" id="footerLinks"></ul>
     </div>
   </footer>
 
-  <a class="to-top" href="#home" id="toTop" aria-label="Back to top">↑</a>
+  <!-- ============ FLOATING BOTTOM NAVIGATION ============ -->
+  <nav class="bottom-nav" id="bottomNav" aria-label="Section navigation">
+    <a href="#home" data-nav="home"><span class="bn-ico" aria-hidden="true"></span><span class="bn-label">Home</span></a>
+    <a href="#about" data-nav="about"><span class="bn-ico" aria-hidden="true"></span><span class="bn-label">About</span></a>
+    <a href="#skills" data-nav="skills"><span class="bn-ico" aria-hidden="true"></span><span class="bn-label">Skills</span></a>
+    <a href="#projects" data-nav="projects"><span class="bn-ico" aria-hidden="true"></span><span class="bn-label">Projects</span></a>
+    <a href="#training" data-nav="training"><span class="bn-ico" aria-hidden="true"></span><span class="bn-label">Training</span></a>
+    <a href="#certificates" data-nav="certificates"><span class="bn-ico" aria-hidden="true"></span><span class="bn-label">Certificates</span></a>
+    <a href="#education" data-nav="education"><span class="bn-ico" aria-hidden="true"></span><span class="bn-label">Education</span></a>
+    <a href="#resume" data-nav="resume"><span class="bn-ico" aria-hidden="true"></span><span class="bn-label">Resume</span></a>
+    <a href="#contact" data-nav="contact"><span class="bn-ico" aria-hidden="true"></span><span class="bn-label">Contact</span></a>
+  </nav>
+
+  <!-- ============ POPUP / MODAL (projects & training) ============ -->
+  <div class="modal-overlay" id="modalOverlay" hidden>
+    <div class="modal-box" id="modalBox" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="modal-close" id="modalClose" type="button" aria-label="Close">✕</button>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+
+  <!-- ============ LIGHTBOX (certificates) ============ -->
+  <div class="lightbox-overlay" id="lightboxOverlay" hidden>
+    <button class="modal-close" id="lightboxClose" type="button" aria-label="Close">✕</button>
+    <img id="lightboxImg" src="" alt="" />
+  </div>
 
   <!-- data.js must load BEFORE script.js -->
   <script src="data.js"></script>
