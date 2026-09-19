@@ -237,7 +237,7 @@ const portfolioData = {
     email: "deepakrajj35@gmail.com",
     phone: "+91 7250117850",
     location: "Ranchi, Jharkhand, India",
-    linkedin: "https://www.linkedin.com/in/your-linkedin-id",
+    linkedin: "https://www.linkedin.com/in/deepak-kumar-750784382/?lipi=urn%3Ali%3Apage%3Ad_flagship3_feed%3Bru5Hpl8LTreHOZQu9VmQ3A%3D%3D",
     github: "https://github.com/your-username",
     note: "The quickest way to reach me is email. I usually reply within a day."
   },
