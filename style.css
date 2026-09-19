@@ -7,8 +7,8 @@
    ============================================================ */
 
 :root {
-  --bg:          #0D2117;
-  --bg-alt:      #112A1C;
+  --bg:          #050806;
+  --bg-alt:      #0A130D;
   --surface:     #163524;
   --surface-2:   #1C4029;
   --border:      #2F5A3E;
@@ -533,37 +533,26 @@ main, .site-footer, .bottom-nav, .modal-overlay, .lightbox-overlay {
 }
 .lightbox-overlay .modal-close { top: 18px; right: 18px; background: var(--surface); }
 
-/* ---------------- Certificates ---------------- */
+/* ---------------- Certificates ----------------
+   Now uses the same compact .mini-card (icon + name) as projects/training —
+   see "Auto slider" section above for that rule. This just lays them out
+   in a plain wrapping grid (no auto-slide) and sizes the certificate
+   preview image inside the click-to-open popup. */
 .cert-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 22px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
 }
-.cert-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  overflow: hidden;
-  cursor: pointer;
-  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
-}
-.cert-card:hover, .cert-card:focus-visible {
-  border-color: var(--accent);
-  transform: translateY(-3px) scale(1.02);
-  box-shadow: var(--glow-gold);
-  filter: brightness(1.06);
-}
-.cert-card:hover h3, .cert-card:focus-visible h3 { font-weight: 700; }
-.cert-card img {
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
+.cert-grid .mini-card { flex: 0 0 170px; }
+
+.cert-modal-img {
+  max-height: 320px;
+  width: auto;
+  max-width: 100%;
+  margin: 0 auto 20px;
+  object-fit: contain;
   background: var(--surface-2);
-  border-bottom: 1px solid var(--border);
 }
-.cert-body { padding: 18px 20px 20px; }
-.cert-body h3 { font-size: 1rem; margin-bottom: 4px; }
-.cert-meta { margin: 0 0 14px; color: var(--text-muted); font-size: 0.86rem; }
 
 /* ---------------- Education: vertical timeline ---------------- */
 .edu-timeline {

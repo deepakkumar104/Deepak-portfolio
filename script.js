@@ -251,7 +251,23 @@
     setupSlider("trainingTrack", '[data-slider="training"]', d.training, "program", trainingModalHTML);
   }
 
-  /* ---------- 6. Certificates ---------- */
+  /* ---------- 6. Certificates ----------
+     Compact icon + name cards, same pattern as projects/training: full
+     details (name, organization, date, a size-limited preview image, and
+     a "view full size" action) only appear once you click/tap the card. */
+
+  function certModalHTML(c) {
+    var meta = [c.organization, c.date].filter(Boolean).join(" · ");
+    return (
+      "<h3>" + esc(c.name) + "</h3>" +
+      (meta ? '<p class="modal-meta">' + esc(meta) + "</p>" : "") +
+      (c.image ? '<img class="cert-modal-img" src="' + esc(c.image) + '" alt="' + esc(c.name) + '" />' : "") +
+      '<div class="modal-actions">' +
+        '<button type="button" class="btn btn-primary btn-sm js-open-lightbox" data-src="' +
+        esc(c.link || c.image) + '" data-alt="' + esc(c.name) + '">View full size</button>' +
+      "</div>"
+    );
+  }
 
   var certGrid = el("certGrid");
   if (certGrid) {
@@ -259,24 +275,13 @@
       hideSection("certificates");
     } else {
       certGrid.innerHTML = d.certificates.map(function (c, i) {
-        var meta = [c.organization, c.date].filter(Boolean).join(" · ");
-        return (
-          '<button type="button" class="cert-card reveal" data-index="' + i + '">' +
-            '<img src="' + esc(c.image || "") + '" alt="' + esc(c.name) + '" loading="lazy" />' +
-            '<div class="cert-body">' +
-              "<h3>" + esc(c.name) + "</h3>" +
-              (meta ? '<p class="cert-meta">' + esc(meta) + "</p>" : "") +
-              '<span class="btn btn-outline btn-sm">View certificate</span>' +
-            "</div>" +
-          "</button>"
-        );
+        return miniCardHTML(c.icon || "📜", c.name, i);
       }).join("");
 
       certGrid.addEventListener("click", function (event) {
-        var card = event.target.closest(".cert-card");
+        var card = event.target.closest(".mini-card");
         if (!card) return;
-        var c = d.certificates[Number(card.dataset.index)];
-        openLightbox(c.link || c.image, c.name);
+        openModal(certModalHTML(d.certificates[Number(card.dataset.index)]));
       });
     }
   }

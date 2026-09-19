@@ -185,6 +185,7 @@ const portfolioData = {
   /* ---------- 6. CERTIFICATES ---------- */
   certificates: [
     {
+      icon: "📡",
       name: "IoT Training Certificate",
       organization: "Tool Room Ranchi",
       date: "2025",
@@ -192,6 +193,7 @@ const portfolioData = {
       link: "images/certificate1.jpg"    // opens the full certificate image
     },
     {
+      icon: "☀️",
       name: "Solar PV Training Certificate",
       organization: "Tata Power Skill Development Institute (TPSDI)",
       date: "2025",
