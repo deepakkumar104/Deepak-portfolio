@@ -480,17 +480,55 @@
     else if (!modalOverlay.hidden) closeModal();
   });
 
-  /* ---------- 13. Bottom nav: active section + reveal on scroll ---------- */
+  /* ---------- 13. Bottom nav: active section, "More" sheet, reveal on scroll ---------- */
 
   var sections = Array.prototype.slice.call(document.querySelectorAll("main section[id]"));
   var navLinks = Array.prototype.slice.call(document.querySelectorAll(".bottom-nav a"));
+  var moreToggle = el("bnMoreToggle");
+  var moreSheet = el("moreSheet");
+  var moreItems = Array.prototype.slice.call(document.querySelectorAll(".bn-more-item"));
+  var moreIds = moreItems.map(function (a) { return a.dataset.nav; });
+  var sheetLinks = [];
+
+  if (moreToggle && moreSheet && moreItems.length) {
+    moreSheet.innerHTML = moreItems.map(function (a) { return a.outerHTML; }).join("");
+    sheetLinks = Array.prototype.slice.call(moreSheet.querySelectorAll("a"));
+
+    function closeMoreSheet() {
+      moreSheet.hidden = true;
+      moreToggle.setAttribute("aria-expanded", "false");
+    }
+    moreToggle.addEventListener("click", function (event) {
+      event.stopPropagation();
+      var willOpen = moreSheet.hidden;
+      closeMoreSheet();
+      if (willOpen) {
+        moreSheet.hidden = false;
+        moreToggle.setAttribute("aria-expanded", "true");
+      }
+    });
+    sheetLinks.forEach(function (a) { a.addEventListener("click", closeMoreSheet); });
+    document.addEventListener("click", function (event) {
+      if (moreSheet.hidden) return;
+      if (moreSheet.contains(event.target) || moreToggle.contains(event.target)) return;
+      closeMoreSheet();
+    });
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape" && !moreSheet.hidden) closeMoreSheet();
+    });
+  }
 
   if ("IntersectionObserver" in window) {
     var navObserver = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (!entry.isIntersecting) return;
+        var id = entry.target.id;
         navLinks.forEach(function (link) {
-          link.classList.toggle("active", link.getAttribute("href") === "#" + entry.target.id);
+          link.classList.toggle("active", link.getAttribute("href") === "#" + id);
+        });
+        if (moreToggle) moreToggle.classList.toggle("active", moreIds.indexOf(id) !== -1);
+        sheetLinks.forEach(function (link) {
+          link.classList.toggle("active", link.getAttribute("href") === "#" + id);
         });
       });
     }, { rootMargin: "-40% 0px -50% 0px" });

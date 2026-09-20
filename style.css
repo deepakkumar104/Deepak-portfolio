@@ -665,7 +665,7 @@ main, .site-footer, .bottom-nav, .modal-overlay, .lightbox-overlay {
   gap: 2px;
   max-width: calc(100vw - 20px);
   overflow-x: auto;
-  background: rgba(13, 24, 18, 0.78);
+  background: rgba(3, 8, 5, 0.82);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   border: 1px solid var(--accent-soft);
@@ -675,7 +675,7 @@ main, .site-footer, .bottom-nav, .modal-overlay, .lightbox-overlay {
   scrollbar-width: none;
 }
 .bottom-nav::-webkit-scrollbar { display: none; }
-.bottom-nav a {
+.bottom-nav a, .bn-more-toggle {
   flex: 0 0 auto;
   display: flex;
   flex-direction: column;
@@ -687,20 +687,64 @@ main, .site-footer, .bottom-nav, .modal-overlay, .lightbox-overlay {
   font-size: 0.66rem;
   font-weight: 600;
   white-space: nowrap;
+  background: transparent;
+  border: none;
+  font-family: inherit;
+  cursor: pointer;
   transition: color 0.2s ease, background-color 0.2s ease;
 }
-.bottom-nav a:hover { color: var(--text); text-decoration: none; }
-.bottom-nav a.active { color: var(--accent); background: rgba(232, 169, 74, 0.14); box-shadow: var(--glow-gold); }
-.bn-ico { font-size: 1.05rem; line-height: 1; }
-.bottom-nav a[data-nav="home"] .bn-ico::before { content: "🏠"; }
-.bottom-nav a[data-nav="about"] .bn-ico::before { content: "🙂"; }
-.bottom-nav a[data-nav="skills"] .bn-ico::before { content: "🧩"; }
-.bottom-nav a[data-nav="projects"] .bn-ico::before { content: "⚡"; }
-.bottom-nav a[data-nav="training"] .bn-ico::before { content: "🎓"; }
-.bottom-nav a[data-nav="certificates"] .bn-ico::before { content: "📜"; }
-.bottom-nav a[data-nav="education"] .bn-ico::before { content: "📘"; }
-.bottom-nav a[data-nav="resume"] .bn-ico::before { content: "📄"; }
-.bottom-nav a[data-nav="contact"] .bn-ico::before { content: "✉️"; }
+.bottom-nav a:hover, .bn-more-toggle:hover { color: var(--text); text-decoration: none; }
+.bottom-nav a.active, .bn-more-toggle.active {
+  color: var(--accent);
+  background: rgba(232, 169, 74, 0.14);
+  box-shadow: var(--glow-gold);
+}
+.bn-ico { line-height: 1; display: flex; }
+.bn-ico svg {
+  width: 19px;
+  height: 19px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* The "More" toggle only appears once the phone layout collapses the
+   secondary links into it — see the mobile media query below. */
+.bn-more-toggle { display: none; }
+
+/* Sheet listing Projects/Training/Certificates/Education/Resume/Contact
+   on phones, opened by the More button. */
+.more-sheet {
+  position: fixed;
+  left: 10px;
+  right: 10px;
+  bottom: 86px;
+  z-index: 99;
+  background: rgba(3, 8, 5, 0.94);
+  border: 1px solid var(--accent-soft);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 0 24px rgba(232, 169, 74, 0.18), var(--shadow);
+  padding: 10px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+}
+.more-sheet a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 14px 6px;
+  border-radius: var(--radius);
+  color: var(--text);
+  font-size: 0.74rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+.more-sheet a:hover, .more-sheet a.active { background: rgba(232, 169, 74, 0.12); color: var(--accent); }
+.more-sheet .bn-ico svg { width: 22px; height: 22px; }
 
 /* ---------------- Reveal on scroll (subtle) ---------------- */
 .reveal { opacity: 0; transform: translateY(14px); }
@@ -728,12 +772,15 @@ main, .site-footer, .bottom-nav, .modal-overlay, .lightbox-overlay {
   .hero-actions, .resume-actions { width: 100%; }
   .modal-box { padding: 30px 20px 24px; }
   .site-footer { padding-bottom: 96px; }
-  /* Icon-only nav on phones: with no text label, all 9 items fit in one
-     row on typical phone widths, so nothing sits hidden behind scrolling. */
+  /* Phone bottom nav: only Home / About / Skills / More stay on the bar;
+     the rest move into the More sheet so nothing needs a "more" scroll. */
   .bottom-nav { gap: 0; padding: 6px 8px; justify-content: space-between; width: calc(100% - 20px); }
-  .bottom-nav a { padding: 8px 6px; flex: 1 1 0; }
-  .bn-ico { font-size: 1.15rem; }
+  .bottom-nav a, .bottom-nav .bn-more-toggle { padding: 8px 6px; flex: 1 1 0; }
+  .bn-ico svg { width: 21px; height: 21px; }
   .bn-label { display: none; }
+  .more-sheet .bn-label { display: block; } /* labels stay visible inside the More sheet itself */
+  .bn-more-item { display: none; }
+  .bn-more-toggle { display: flex; }
 }
 
 /* ---------------- Reduced motion ---------------- */

@@ -48,7 +48,7 @@
           <div class="hero-photo">
             <img id="heroPhoto" src="images/profile.jpg" alt="Profile photo" width="420" height="420" />
           </div>
-          <ul class="contact-icons" id="heroContactIcons" aria-label="Contact links"></ul>
+          <a class="btn btn-outline" href="#contact">Contact me</a>
         </div>
       </div>
     </section>
@@ -162,16 +162,52 @@
 
   <!-- ============ FLOATING BOTTOM NAVIGATION ============ -->
   <nav class="bottom-nav" id="bottomNav" aria-label="Section navigation">
-    <a href="#home" data-nav="home"><span class="bn-ico" aria-hidden="true"></span><span class="bn-label">Home</span></a>
-    <a href="#about" data-nav="about"><span class="bn-ico" aria-hidden="true"></span><span class="bn-label">About</span></a>
-    <a href="#skills" data-nav="skills"><span class="bn-ico" aria-hidden="true"></span><span class="bn-label">Skills</span></a>
-    <a href="#projects" data-nav="projects"><span class="bn-ico" aria-hidden="true"></span><span class="bn-label">Projects</span></a>
-    <a href="#training" data-nav="training"><span class="bn-ico" aria-hidden="true"></span><span class="bn-label">Training</span></a>
-    <a href="#certificates" data-nav="certificates"><span class="bn-ico" aria-hidden="true"></span><span class="bn-label">Certificates</span></a>
-    <a href="#education" data-nav="education"><span class="bn-ico" aria-hidden="true"></span><span class="bn-label">Education</span></a>
-    <a href="#resume" data-nav="resume"><span class="bn-ico" aria-hidden="true"></span><span class="bn-label">Resume</span></a>
-    <a href="#contact" data-nav="contact"><span class="bn-ico" aria-hidden="true"></span><span class="bn-label">Contact</span></a>
+    <a href="#home" data-nav="home">
+      <span class="bn-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 11 12 4l8 7"/><path d="M6 10v9a1 1 0 0 0 1 1h4v-6h2v6h4a1 1 0 0 0 1-1v-9"/></svg></span>
+      <span class="bn-label">Home</span>
+    </a>
+    <a href="#about" data-nav="about">
+      <span class="bn-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.4"/><path d="M5 20c1.4-4.2 4-6.2 7-6.2s5.6 2 7 6.2"/></svg></span>
+      <span class="bn-label">About</span>
+    </a>
+    <a href="#skills" data-nav="skills">
+      <span class="bn-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="10" rx="1.4"/><path d="M9 3v3M12 3v3M15 3v3M9 18v3M12 18v3M15 18v3M3 9h3M3 12h3M3 15h3M18 9h3M18 12h3M18 15h3"/></svg></span>
+      <span class="bn-label">Skills</span>
+    </a>
+    <button type="button" class="bn-more-toggle" id="bnMoreToggle" aria-haspopup="true" aria-expanded="false">
+      <span class="bn-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg></span>
+      <span class="bn-label">More</span>
+    </button>
+    <a href="#projects" data-nav="projects" class="bn-more-item">
+      <span class="bn-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M13 3 5 13h5l-1 8 8-11h-5l1-7z"/></svg></span>
+      <span class="bn-label">Projects</span>
+    </a>
+    <a href="#training" data-nav="training" class="bn-more-item">
+      <span class="bn-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 4 2 9l10 5 10-5-10-5z"/><path d="M6 12v5c0 1.4 2.7 2.8 6 2.8s6-1.4 6-2.8v-5"/></svg></span>
+      <span class="bn-label">Training</span>
+    </a>
+    <a href="#certificates" data-nav="certificates" class="bn-more-item">
+      <span class="bn-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 3h7l4 4v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/><path d="M14 3v4h4"/><path d="M9 13h6M9 16h4"/></svg></span>
+      <span class="bn-label">Certificates</span>
+    </a>
+    <a href="#education" data-nav="education" class="bn-more-item">
+      <span class="bn-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 5.5c2-1 5-1 7 .3v13.7c-2-1.3-5-1.3-7-.3V5.5z"/><path d="M20 5.5c-2-1-5-1-7 .3v13.7c2-1.3 5-1.3 7-.3V5.5z"/></svg></span>
+      <span class="bn-label">Education</span>
+    </a>
+    <a href="#resume" data-nav="resume" class="bn-more-item">
+      <span class="bn-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 3h7l4 4v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/><path d="M14 3v4h4"/><path d="M9 9h2M9 12h6M9 15h6"/></svg></span>
+      <span class="bn-label">Resume</span>
+    </a>
+    <a href="#contact" data-nav="contact" class="bn-more-item">
+      <span class="bn-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 6h18v12H3z"/><path d="m3 7 9 6 9-6"/></svg></span>
+      <span class="bn-label">Contact</span>
+    </a>
   </nav>
+
+  <!-- "More" sheet: on phones, Projects/Training/Certificates/Education/
+       Resume/Contact live here instead of the main bar (see .bn-more-item
+       in the CSS), opened by the More button above. -->
+  <div class="more-sheet" id="moreSheet" hidden></div>
 
   <!-- ============ POPUP / MODAL (projects & training) ============ -->
   <div class="modal-overlay" id="modalOverlay" hidden>
