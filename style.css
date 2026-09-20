@@ -779,7 +779,7 @@ main, .site-footer, .bottom-nav, .modal-overlay, .lightbox-overlay {
   .bn-ico svg { width: 21px; height: 21px; }
   .bn-label { display: none; }
   .more-sheet .bn-label { display: block; } /* labels stay visible inside the More sheet itself */
-  .bn-more-item { display: none; }
+  .bottom-nav a.bn-more-item { display: none; }
   .bn-more-toggle { display: flex; }
 }
 
