@@ -240,7 +240,7 @@ const portfolioData = {
     phone: "+91 7250117850",
     location: "Ranchi, Jharkhand, India",
     linkedin: "https://www.linkedin.com/in/deepak-kumar-750784382/",
-    github: "https://github.com/your-username",
+    github: "https://github.com/deepakkumar104",
     note: "The quickest way to reach me is email. I usually reply within a day."
   },
 
