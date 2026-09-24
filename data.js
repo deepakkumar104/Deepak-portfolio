@@ -236,10 +236,10 @@ const portfolioData = {
   /* Shown as icons only, in two places: beside the hero photo, and in
      the Contact section footer. "location" opens a map search link. */
   contact: {
-    email: "deepak@example.com",
-    phone: "+91 00000 00000",
+    email: "deepakrajj35@gmail.com",
+    phone: "+91 7250117850",
     location: "Ranchi, Jharkhand, India",
-    linkedin: "https://www.linkedin.com/in/your-linkedin-id",
+    linkedin: "https://www.linkedin.com/in/deepak-kumar-750784382/",
     github: "https://github.com/your-username",
     note: "The quickest way to reach me is email. I usually reply within a day."
   },
